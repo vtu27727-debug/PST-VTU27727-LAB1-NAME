@@ -1,0 +1,26 @@
+import java.util.function.Function;
+public class CustomerDiscountExample {
+    static void processDiscount(double amount, Function<Double, Double> operation) {
+        double result = operation.apply(amount);
+        System.out.println("Final amount: " + result);
+    }
+        public static void main(String[] args) {
+        double purchaseAmount = 5000.0;
+        // 1st customer: 10% discount
+        System.out.print("1st Customer (10% discount) -> ");
+        processDiscount(purchaseAmount, a -> a - (a * 0.10));
+         // 2nd customer: 20% discount
+        System.out.print("2nd Customer (20% discount) -> ");
+        processDiscount(purchaseAmount, a -> a - (a * 0.20));
+        // 3rd customer: No discount
+        System.out.print("3rd Customer (No discount) -> ");
+        processDiscount(purchaseAmount, a -> a);
+    }
+}
+
+OUTPUT
+1st Customer (10% discount) -> Final amount: 4500.0
+2nd Customer (20% discount) -> Final amount: 4000.0
+3rd Customer (No discount) -> Final amount: 5000.0
+
+=== Code Execution Successful ===
