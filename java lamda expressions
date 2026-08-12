@@ -1,0 +1,77 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+interface PerformOperation {
+    boolean check(int a);
+}
+
+class MyMath {
+    
+    // 1: Odd, 2: Prime, 3: Palindrome
+    public static PerformOperation isOdd(){
+        // Lambda: return true if odd
+        return (int a) -> a % 2 != 0;
+    }
+    
+    public static PerformOperation isPrime(){
+        // Lambda: check prime
+        return (int a) -> {
+            if(a < 2) return false;
+            if(a == 2) return true;
+            if(a % 2 == 0) return false;
+            for(int i = 3; i <= Math.sqrt(a); i += 2){
+                if(a % i == 0) return false;
+            }
+            return true;
+        };
+    }
+    
+    public static PerformOperation isPalindrome(){
+        // Lambda: reverse number and check
+        return (int a) -> {
+            int temp = a;
+            int rev = 0;
+            while(temp > 0){
+                rev = rev * 10 + temp % 10;
+                temp /= 10;
+            }
+            return a == rev;
+        };
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) throws IOException{
+        MyMath ob = new MyMath();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
+        PerformOperation op;
+        boolean ret = false;
+        String ans = null;
+        while (T--> 0){
+            String s = br.readLine().trim();
+            StringTokenizer st = new StringTokenizer(s);
+            int ch = Integer.parseInt(st.nextToken());
+            int num = Integer.parseInt(st.nextToken()); 
+            if(ch == 1){
+                op = ob.isOdd();
+                ret = op.check(num);
+                ans = (ret)?"ODD":"EVEN";
+            }
+            else if(ch == 2){
+                op = ob.isPrime();
+                ret = op.check(num);
+                ans = (ret)?"PRIME":"COMPOSITE";
+            }
+            else if(ch == 3){
+                op = ob.isPalindrome();
+                ret = op.check(num);
+                ans = (ret)?"PALINDROME":"NOT PALINDROME";
+            }
+            System.out.println(ans);
+        }
+    }
+}
