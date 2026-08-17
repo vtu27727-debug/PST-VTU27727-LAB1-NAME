@@ -1,4 +1,4 @@
-c       lass Solution {
+class Solution {
 public:
     bool halvesAreAlike(string s) {
         int mid = s.length() / 2;
