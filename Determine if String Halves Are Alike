@@ -1,0 +1,19 @@
+c       lass Solution {
+public:
+    bool halvesAreAlike(string s) {
+        int mid = s.length() / 2;
+        int countA = 0, countB = 0;
+
+        string vowels = "aeiouAEIOU";
+
+        for (int i = 0; i < mid; i++) {
+            if (vowels.find(s[i]) != string::npos)
+                countA++;
+
+            if (vowels.find(s[i + mid]) != string::npos)
+                countB++;
+        }
+
+        return countA == countB;
+    }
+};
